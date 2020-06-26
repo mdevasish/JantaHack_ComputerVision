@@ -22,3 +22,5 @@ Since these are the baby steps towards to learn convolution neural networks, I h
 Further Work:
 
 Understand and implement pretrained models like Imagenet and VGGNet etc along with using data augmentation techniques to improve the accuracy.
+
+! [Screenshot](Screenshot.jpg)
