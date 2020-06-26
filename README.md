@@ -20,4 +20,5 @@ Approach:
 Since these are the baby steps towards to learn convolution neural networks, I have implemented a very basic convolution network without the use of any pretrained models. The model architecture consists of 4 layers of conv2D, BatchNormalization and MaxPooling2D stacked with flattened layer along with 2 dense layers connected to the output layer. The dense layers are sandwiched with drop out layers after each dense layer to handle the over fitting.
 
 Further Work:
+
 Try pretrained models like Imagenet and VGGNet etc to improve the accuracy.
