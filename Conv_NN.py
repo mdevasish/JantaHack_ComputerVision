@@ -59,7 +59,7 @@ train_list = read_images(images_path,train_images)
 # Read test images
 test_list = read_images(images_path,test_images)
 
-print('#'*10+'File read complete''#'*10)
+print('#'*10+'File read complete'+'#'*10)
 
 # Building Model Architecture and compiling
 model = Sequential()
@@ -96,7 +96,8 @@ monitor=EarlyStopping(monitor='val_accuracy', patience=5, verbose=1)
 
 hist = model.fit(np.array(train_list),np.array(labels),validation_split = 0.25,\
                  epochs = 10,callbacks = [monitor])
-    
+   
+#%%
 def plot_graphs(history, string):
     '''Plot the accuracies to visulaise the underfitting/overfitting issues'''
     plt.subplots(figsize=(24, 12))
@@ -107,7 +108,8 @@ def plot_graphs(history, string):
     plt.legend([string, 'val_'+string])
     plt.show()
 
-plot_graphs(history,'accuracy')
+plot_graphs(hist,'accuracy')
+plot_graphs(hist,'loss')
 
 predictions = model.predict(np.array(test_list))
 #%%
@@ -121,16 +123,16 @@ for each in predictions:
 
 #%%
 
-def submit_results(read_file,write_file):
+def submit_results(read_file,write_file,write_json,weights_file):
     '''Store the model architecture into json like structure and write the results'''
-    with open('model.json','w') as file:
+    with open(write_json,'w') as file:
         file.write(model.to_json())
 
-    model.save_weights('model_weights.h5')
-    sub = pd.read_csv(file)
+    model.save_weights(weights_file)
+    sub = pd.read_csv(read_file)
 
     sub['emergency_or_not'] = fpred
 
     sub.to_csv(write_file,index = False)
 
-submit_results('sample_submission.csv','Conv_NN_customised.csv')
+submit_results('sample_submission.csv','Conv_NN_customised.csv','model.json','model_weights.h5')
